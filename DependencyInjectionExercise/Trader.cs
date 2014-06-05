@@ -2,7 +2,12 @@
 {
   public class Trader 
   {
-    private YahooStockService stockService =  new YahooStockService();
+    private readonly StockService stockService;
+
+    public Trader(StockService stockService)
+    {
+      this.stockService = stockService;
+    }
 
     public bool Buy(string symbol, decimal bid, int amount, out decimal currentPrice)
     {

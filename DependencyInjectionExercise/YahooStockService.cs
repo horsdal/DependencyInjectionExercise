@@ -2,15 +2,20 @@
 {
   using System.Net;
 
-  public class YahooStockService
+  public class YahooStockService : StockService
   {
-    public const string YahooPath = "http://finance.yahoo.com/d/quotes?s={0}&f=b";
+    private readonly string serviceUriFormat;
+
+    public YahooStockService(string serviceUriFormat)
+    {
+      this.serviceUriFormat = serviceUriFormat;
+    }
 
     public decimal CurrentPriceOf(string symbol)
     {
       var webClient = new WebClient();
-      var quote = webClient.DownloadString(string.Format(YahooPath, symbol));
-      return decimal.Parse(quote);
+      var quote = webClient.DownloadString(string.Format(serviceUriFormat, symbol));
+        return decimal.Parse(quote);
     }
 
     public void Buy(string symbol, int amount)

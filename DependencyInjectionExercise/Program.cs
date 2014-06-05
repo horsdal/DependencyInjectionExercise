@@ -22,11 +22,13 @@
         Console.WriteLine("Bought {0} at {1}", symbol, currentPrice);
       else
         Console.WriteLine("Didn't buy {0} because current price is {1}", symbol, currentPrice);
+
+      Console.ReadLine();
     }
 
     private static void ComposeApplication()
     {
-      trader = new Trader();
+      trader = new Trader(new YahooStockService("http://finance.yahoo.com/d/quotes?s={0}&f=b"));
     }
   }
 }
